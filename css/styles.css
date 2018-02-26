@@ -1,0 +1,61 @@
+@import "reset.css";
+
+body {
+    font-family: sans-serif;
+    min-width: 645px;
+}
+
+section {
+
+}
+
+article {
+    margin: 1rem;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+#facets {
+    float: left;
+    width: 30%;
+}
+
+.facet, .result {
+    padding: 1rem;
+    border-radius: 3px;
+    border: 1px solid #EDEEEE;
+    box-shadow: 0 10px 6px -6px #b3b3b3;
+}
+
+.author, .year {
+    width: 100%;
+    padding-bottom: .2rem;
+}
+
+.author:hover, .year:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.author_selected, .year_selected {
+    font-weight: bold;
+}
+
+#results {
+    float: left;
+    width: 70%;
+}
+
+.result_author {
+    font-size: .8rem;
+    padding-bottom: 0.5rem;
+    font-style: italic;
+}
