@@ -5,7 +5,7 @@ requirejs.config({
     }
 });
 
-requirejs(["domReady", "app/service"], function (domReady, service) {
+requirejs(["domReady", "app/domElements", "app/service"], function (domReady, domElements, service) {
 
     var FACET_MAPPINGS = {
         "author": {
@@ -22,16 +22,15 @@ requirejs(["domReady", "app/service"], function (domReady, service) {
 
         function createFacet(field, fieldTitle) {
             var fieldValues = service.listFacetValues(field);
-            var facetElement = document.createElement("article");
-            facetElement.setAttribute("class", "facet");
-            var facetTitle = document.createElement("h1");
-            facetTitle.innerText = fieldTitle;
+            var facetElement = domElements.create({"tagName": "article", "className": "facet"});
+            var facetTitle = domElements.create({"tagName": "h1", "innerText": fieldTitle});
             facetElement.appendChild(facetTitle);
             for (var i = 0; i < fieldValues.length; i++) {
-                var facetValueElement = document.createElement("div");
-                facetValueElement.setAttribute("id", field + "_" + i);
-                facetValueElement.setAttribute("class", field);
-                facetValueElement.innerText = fieldValues[i];
+                var facetValueElement = domElements.create({
+                    "id": field + "_" + i,
+                    "className": field,
+                    "innerText": fieldValues[i]
+                });
                 facetElement.appendChild(facetValueElement);
             }
             document.getElementById("facets").appendChild(facetElement);
@@ -40,17 +39,15 @@ requirejs(["domReady", "app/service"], function (domReady, service) {
         function loadResults(arrayOfResults) {
             document.getElementById("results").innerHTML = "";
             arrayOfResults.forEach(function (result) {
-                var resultElement = document.createElement("article");
-                resultElement.setAttribute("class", "result");
-                var titleElement = document.createElement("h1");
-                titleElement.innerText = result.title;
+                var resultElement = domElements.create({"tagName": "article", "className": "result"});
+                var titleElement = domElements.create({"tagName": "h1", "innerText": result.title});
                 resultElement.appendChild(titleElement);
-                var authorElement = document.createElement("div");
-                authorElement.setAttribute("class", "result_author");
-                authorElement.innerText = "Written by " + result.author + " in " + result.year;
+                var authorElement = domElements.create({
+                    "className": "result_author",
+                    "innerText": "Written by " + result.author + " in " + result.year
+                });
                 resultElement.appendChild(authorElement);
-                var abstractElement = document.createElement("p");
-                abstractElement.innerText = result.abstract;
+                var abstractElement = domElements.create({"tagName": "p", "innerText": result.abstract});
                 resultElement.appendChild(abstractElement);
                 document.getElementById("results").appendChild(resultElement);
             });
